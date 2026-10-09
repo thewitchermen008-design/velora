@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velora - Premium Handbags & Suits</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">VELORA</div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#handbags">Handbags</a>
+    <a href="#suits">Unstitched Suits</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="icons">
+    <span>🔍</span>
+    <span class="cart-icon">🛒 <span id="cart-count">0</span></span>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-text">
+    <h1>Timeless Elegance</h1>
+    <p>Premium Handbags & Unstitched Suits</p>
+    <button class="btn-gold" onclick="scrollToProducts()">Shop Now</button>
+  </div>
+</section>
+
+<section class="categories">
+  <div class="cat-box" onclick="filterProducts('handbags')">
+    <h3>Handbags</h3>
+    <p>Luxury Collection</p>
+  </div>
+  <div class="cat-box" onclick="filterProducts('suits')">
+    <h3>Unstitched Suits</h3>
+    <p>Elegant Fabrics</p>
+  </div>
+</section>
+
+<section class="trust">
+  <div>✅ Free Delivery</div>
+  <div>✅ Cash on Delivery</div>
+  <div>✅ 7-Day Returns</div>
+  <div>✅ 100% Original</div>
+</section>
+
+<section class="products" id="products">
+  <h2>Featured Products</h2>
+  <div class="product-grid" id="product-grid"></div>
+</section>
+
+<div class="cart-modal" id="cart-modal">
+  <div class="cart-box">
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <div class="cart-total">Total: Rs. <span id="cart-total">0</span></div>
+    <button class="btn-gold" onclick="checkout()">Checkout</button>
+    <button class="btn-close" onclick="closeCart()">Close</button>
+  </div>
+</div>
+
+<div class="cart-modal" id="checkout-modal">
+  <div class="cart-box">
+    <h2>Checkout</h2>
+    <input type="text" id="cust-name" placeholder="Full Name *">
+    <input type="tel" id="cust-phone" placeholder="Phone Number *">
+    <input type="text" id="cust-address1" placeholder="Address Line 1 (House/Street) *">
+    <input type="text" id="cust-address2" placeholder="Address Line 2 (Landmark)">
+    <select id="cust-city">
+      <option value="">Select City *</option>
+      <option>Karachi</option>
+      <option>Lahore</option>
+      <option>Islamabad</option>
+      <option>Rawalpindi</option>
+      <option>Faisalabad</option>
+      <option>Multan</option>
+      <option>Peshawar</option>
+      <option>Quetta</option>
+      <option>Other</option>
+    </select>
+    <select id="cust-province">
+      <option value="">Select Province *</option>
+      <option>Sindh</option>
+      <option>Punjab</option>
+      <option>Khyber Pakhtunkhwa</option>
+      <option>Balochistan</option>
+    </select>
+    <input type="text" id="cust-postal" placeholder="Postal Code (e.g. 75500)">
+    <select id="payment">
+      <option>Cash on Delivery</option>
+      <option>JazzCash / Easypaisa</option>
+    </select>
+    <button class="btn-gold" onclick="placeOrder()">Place Order</button>
+    <button class="btn-close" onclick="closeCheckout()">Close</button>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 Velora. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
