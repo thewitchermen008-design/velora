@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product - Velora</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.product-detail { display: flex; gap: 40px; padding: 60px 50px; max-width: 1200px; margin: auto; }
+.product-images { flex: 1; }
+.product-images img { width: 100%; border-radius: 8px; }
+.product-info { flex: 1; }
+.product-info h1 { font-size: 36px; font-family: 'Playfair Display', serif; margin-bottom: 15px; }
+.product-info .price { font-size: 28px; color: #d4af37; font-weight: bold; margin-bottom: 20px; }
+.product-info .desc { color: #555; line-height: 1.8; margin-bottom: 25px; }
+.product-info label { display: block; margin: 15px 0 8px; font-weight: bold; }
+.product-info select, .product-info input {
+  width: 100%; padding: 12px; border: 1px solid #ddd; font-size: 16px;
+}
+.qty-box { display: flex; align-items: center; gap: 10px; margin: 15px 0; }
+.qty-box button { width: 40px; height: 40px; font-size: 20px; cursor: pointer; background: #000; color: #d4af37; border: none; }
+.qty-box input { width: 60px; text-align: center; padding: 8px; }
+.action-btns { display: flex; gap: 15px; margin-top: 25px; }
+.btn-add-cart { flex: 1; background: #000; color: #d4af37; padding: 15px; border: none; font-size: 16px; cursor: pointer; font-weight: bold; }
+.btn-buy-now { flex: 1; background: #d4af37; color: #000; padding: 15px; border: none; font-size: 16px; cursor: pointer; font-weight: bold; }
+.delivery-info { background: #f9f6f0; padding: 20px; margin-top: 25px; border-left: 4px solid #d4af37; }
+.delivery-info p { margin: 8px 0; font-size: 14px; }
+@media (max-width: 768px) {
+  .product-detail { flex-direction: column; padding: 20px; }
+  header { flex-direction: column; gap: 15px; padding: 15px; }
+  nav a { margin: 5px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">VELORA</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="index.html#products">Handbags</a>
+    <a href="index.html#products">Unstitched Suits</a>
+    <a href="index.html">About</a>
+    <a href="index.html">Contact</a>
+  </nav>
+  <div class="icons">
+    <span class="cart-icon" onclick="window.location.href='index.html'">🛒 <span id="cart-count">0</span></span>
+  </div>
+</header>
+
+<div class="product-detail" id="product-detail">
+  <!-- JS se bharega -->
+</div>
+
+<footer>
+  <p>© 2025 Velora. All rights reserved.</p>
+  <p style="font-size:12px; margin-top:10px;">7-Day Return Policy | Free Delivery on Rs. 5000+</p>
+</footer>
+
+<script>
+// Products data (same as script.js)
+const products = [
+  { id: 1, name: "Luxury Leather Handbag", price: 4500, category: "handbags",
+    img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=800",
+    desc: "Premium quality leather handbag with elegant design. Perfect for formal and casual occasions. Durable stitching and spacious interior." },
+  { id: 2, name: "Elegant Tote Bag", price: 3200, category: "handbags",
+    img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800",
+    desc: "Stylish tote bag with spacious compartments. Ideal for daily use and work. High-quality material." },
+  { id: 3, name: "Designer Clutch", price: 2800, category: "handbags",
+    img: "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=800",
+    desc: "Elegant designer clutch for parties and events. Compact yet stylish. Perfect evening accessory." },
+  { id: 4, name: "Embroidered Unstitched Suit", price: 5500, category: "suits",
+    img: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800",
+    desc: "Beautifully embroidered unstitched suit. Premium fabric with intricate embroidery work. Perfect for festive occasions." },
+  { id: 5, name: "Lawn 3-Piece Suit", price: 4200, category: "suits",
+    img: "https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=800",
+    desc: "Premium lawn 3-piece unstitched suit. Comfortable fabric, ideal for summer. Includes shirt, dupatta, and trouser." },
+  { id: 6, name: "Chiffon Formal Suit", price: 6800, category: "suits",
+    img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=800",
+    desc: "Elegant chiffon formal suit with heavy embroidery. Perfect for weddings and formal events. Premium quality fabric." }
+];
+
+// Get product ID from URL
+const urlParams = new URLSearchParams(window.location.search);
+const productId = parseInt(urlParams.get('id'));
+const product = products.find(p => p.id === productId);
+
+if (!product) {
+  document.getElementById('product-detail').innerHTML = '<h2>Product not found</h2>';
+} else {
+  document.getElementById('product-detail').innerHTML = `
+    <div class="product-images">
+      <img src="${product.img}" alt="${product.name}">
+    </div>
+    <div class="product-info">
+      <h1>${product.name}</h1>
+      <div class="price">Rs. ${product.price}</div>
+      <p class="desc">${product.desc}</p>
+
+      <label>Size / Color:</label>
+      <select id="size">
+        <option>Standard</option>
+        <option>Small</option>
+        <option>Medium</option>
+        <option>Large</option>
+      </select>
+
+      <label>Quantity:</label>
+      <div class="qty-box">
+        <button onclick="changeQty(-1)">−</button>
+        <input type="text" id="qty" value="1" readonly>
+        <button onclick="changeQty(1)">+</button>
+      </div>
+
+      <div class="action-btns">
+        <button class="btn-add-cart" onclick="addToCartDetail()">Add to Cart</button>
+        <button class="btn-buy-now" onclick="buyNow()">Buy Now</button>
+      </div>
+
+      <div class="delivery-info">
+        <p>🚚 <b>Delivery:</b> Multan 2-3 days | Lahore/Karachi/Islamabad 3-4 days | Other cities 4-5 days</p>
+        <p>💰 <b>COD Available:</b> Cash on Delivery Rs. 50 extra</p>
+        <p>🔄 <b>Return:</b> 7-day return (unused, tags attached)</p>
+        <p>📦 <b>Free Delivery:</b> On orders above Rs. 5000</p>
+      </div>
+    </div>
+  `;
+}
+
+let qty = 1;
+function changeQty(n) {
+  qty = Math.max(1, qty + n);
+  document.getElementById('qty').value = qty;
+}
+
+function addToCartDetail() {
+  const cart = JSON.parse(localStorage.getItem('veloraCart') || '[]');
+  for (let i = 0; i < qty; i++) cart.push(product);
+  localStorage.setItem('veloraCart', JSON.stringify(cart));
+  document.getElementById('cart-count').innerText = cart.length;
+  alert(product.name + " cart mein add ho gaya!");
+}
+
+function buyNow() {
+  addToCartDetail();
+  window.location.href = 'checkout.html';
+}
+
+// Cart count load karo
+const existingCart = JSON.parse(localStorage.getItem('veloraCart') || '[]');
+document.getElementById('cart-count').innerText = existingCart.length;
+</script>
+</body>
+</html>
